@@ -39,9 +39,9 @@ class Trainer():
         return model.to(self.device)
 
     def _initialize_criterion(self):
-        #criterion = torch.nn.MultiMarginLoss()
+        criterion = torch.nn.MultiMarginLoss()
         #criterion = torch.nn.CrossEntropyLoss()
-        criterion = torch.nn.BCELoss()
+        #criterion = torch.nn.BCELoss()
         return criterion.to(self.device)
 
     def _initialize_optimizer(self):
@@ -60,7 +60,7 @@ class Trainer():
         summary = self.validate()
         best_F1 = summary['F1']
         wandb.log(summary, 0)
-        m = torch.nn.Sigmoid()
+        # m = torch.nn.Sigmoid()
 
         # start training
         losses = []
@@ -73,8 +73,8 @@ class Trainer():
                 logits = self.model(x_batch).squeeze(1)
                     
                 # logits.shape: (N, 1 + negative_samples)
-                #loss = self.criterion(logits, torch.argmax(y_batch, 1))
-                loss = self.criterion(m(logits), y_batch.to(torch.float))
+                loss = self.criterion(logits, torch.argmax(y_batch, 1))
+                #loss = self.criterion(m(logits), y_batch.to(torch.float))
                 loss.backward()
                 self.optimizer.step()
                 self.scheduler.step()

@@ -114,3 +114,5 @@ fabric.properties
 wandb/**
 __pycache__
 *.pyc
+.vscode/settings.json
+.gitignore

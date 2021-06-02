@@ -18,7 +18,7 @@ if __name__ == "__main__":
                      'labels': defaultdict(list)}
 
         # 1. Build answerer_info_dict & question_info_dict
-        with open(data_type+'/answerer_info_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/answerer_info_'+data_type+'.txt') as f:
             answerer_info = f.read()
         answerer_info = answerer_info.split('\n')[:-1]
         for answerer_idx, questions in enumerate(answerer_info):
@@ -29,23 +29,23 @@ if __name__ == "__main__":
 
         # 2. Build train & val & test dataset
         # 2.1. Inputs
-        with open(data_type+'/train_query_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/train_query_'+data_type+'.txt') as f:
             train_query = f.read()
         train_query = list(map(int, train_query.split('\n')[:-1]))
         train_data['question_idxes'] = train_query
 
-        with open(data_type+'/valid_query_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/valid_query_'+data_type+'.txt') as f:
             val_query = f.read()
         val_query = list(map(int, val_query.split('\n')[:-1]))
         val_data['question_idxes'] = val_query
 
-        with open(data_type+'/test_query_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/test_query_'+data_type+'.txt') as f:
             test_query = f.read()
         test_query = list(map(int, test_query.split('\n')[:-1]))
         test_data['question_idxes'] = test_query
 
         # 2.2. Labels
-        with open(data_type+'/train_answer_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/train_answer_'+data_type+'.txt') as f:
             train_answer = f.read()
         train_answer = train_answer.split('\n')[:-1]
         for answer_idx, tags in enumerate(train_answer):
@@ -57,7 +57,7 @@ if __name__ == "__main__":
                 if tag not in tag_to_idx:
                     tag_to_idx[tag] = len(tag_to_idx)
 
-        with open(data_type+'/valid_answer_'+data_type+'.txt') as f:
+        with open("data/"+data_type+'/valid_answer_'+data_type+'.txt') as f:
             val_answer = f.read()
         val_answer = val_answer.split('\n')[:-1]
         for answer_idx, tags in enumerate(val_answer):
